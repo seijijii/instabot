@@ -77,12 +77,14 @@ def like_medias(self, medias, check_media=True):
         self.logger.info("Nothing to like.")
         return broken_items
     self.logger.info("Going to like %d medias." % (len(medias)))
+    start_count = self.total['likes']
     for media in tqdm(medias):
         if not self.like(media, check_media):
             self.error_delay()
             broken_items.append(media)
     self.logger.info("DONE: Total liked %d medias." % self.total['likes'])
-    return broken_items
+   if self.total['likes'] != start_count and self.total['likes'] % 20 == 0:
+return broken_items
 
 
 def like_timeline(self, amount=None):

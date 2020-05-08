@@ -23,5 +23,17 @@ bot = Bot()
 bot.login(username=args.u, password=args.p,
           proxy=args.proxy)
 
+tags = ["アクセサリー","シルバー","指輪","おしゃれさんと繋がりたい","オシャレ","シンプル","リング","シルバーアクセサリー]
+wait = 25 * 60  # in seconds => 25 minutes
+retry = 5 * 60 * 60 # in hours => 5 hours
+
+while True:
+    try:
+        for hashtag in tags:
+            bot.like_hashtag(hashtag)
+            sleep(wait)
+    except:
+        sleep(retry)
+
 for hashtag in args.hashtags:
     bot.like_hashtag(hashtag)
